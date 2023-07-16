@@ -12,3 +12,33 @@ body {
 .caption {
   color: #f1f1f186;
 }
+
+.logoInvert {
+  filter: invert(1);
+}
+
+.bgblack {
+  background-color: $dark-page;
+}
+
+.card-wrapper {
+  min-width: 60vw;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 1rem 0;
+
+  color: #f1f1f186;
+  font-size: 0.85rem;
+}
+
+.btns-wrapper {
+  & > * {
+    background-color: $dark-page !important;
+    margin: 0 0.5rem;
+  }
+}
