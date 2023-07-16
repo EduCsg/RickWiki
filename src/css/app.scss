@@ -23,6 +23,7 @@ body {
 
 .card-wrapper {
   min-width: 60vw;
+  background-color: $dark;
 }
 
 .description {
@@ -40,5 +41,23 @@ body {
   & > * {
     background-color: $dark-page !important;
     margin: 0 0.5rem;
+  }
+}
+
+li {
+  list-style: none;
+
+  background: $dark-page;
+  // margin: 1rem 0;
+}
+
+.character-frame {
+  background-color: $dark !important;
+
+  box-sizing: border-box;
+  border: 1px solid $dark-page;
+
+  &:hover {
+    border: 1px solid white;
   }
 }

@@ -1,19 +1,21 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="hHh lpr lfr">
+    <q-header elevated class="bg-dark text-white" height-hint="98">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>
+          <q-avatar>
+            <img
+              src="https://rickandmortyapi.com/icons/icon-512x512.png?v=1538abef51e33ef514e8fe1ab9aeab4e"
+              alt="Logo do site"
+              class="logoInvert"
+            />
+          </q-avatar>
+          &nbsp; RickWiki
+        </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- <q-btn dense flat round icon="menu" @click="toggleRightDrawer" /> -->
       </q-toolbar>
     </q-header>
 
@@ -41,7 +43,7 @@ import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: "Docs",
+    title: "Procurar  Personagens",
     caption: "quasar.dev",
     icon: "school",
     link: "https://quasar.dev",

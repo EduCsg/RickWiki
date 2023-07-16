@@ -1,24 +1,15 @@
 const BaseURL = "https://rickandmortyapi.com/api/character";
 import axios from "axios";
 
+import { formatCharacter } from "../utils/CharacterUtils";
+
 const getAllCharacters = async () => {
   const data = await axios
     .get(BaseURL)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 
-  const character = {
-    name: data.name,
-    species: data.species,
-    origin: data.origin.name,
-    status: data.status,
-    gender: data.gender,
-    imageURL: data.image,
-    episodes: data.episode.length,
-    location: data.location.name,
-  };
-
-  return character;
+  return formatCharacter(data);
 };
 
 const getCharacter = async (id) => {
@@ -27,18 +18,20 @@ const getCharacter = async (id) => {
     .then((res) => res.data)
     .catch((err) => console.log(err));
 
-  const character = {
-    name: data.name,
-    species: data.species,
-    origin: data.origin.name,
-    status: data.status,
-    gender: data.gender,
-    imageURL: data.image,
-    episodes: data.episode.length,
-    location: data.location.name,
-  };
-
-  return character;
+  return formatCharacter(data);
 };
 
-export { getAllCharacters, getCharacter };
+const getCharactersByPage = async (page) => {
+  const data = await axios
+    .get(`${BaseURL}/?page=${page}`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+
+  const charactersList = data.results.map((data) => {
+    return formatCharacter(data);
+  });
+
+  return charactersList;
+};
+
+export { getAllCharacters, getCharacter, getCharactersByPage };
