@@ -1,27 +1,31 @@
 <template>
   <q-page class="flex flex-center">
-    <ul class="flex q-gutter-md justify-center q-mt-lg cards-wrapper">
-      <li
-        v-for="character in charactersList"
-        :key="character.id"
-        @click="handleClick(character.id)"
-      >
-        <SmallCharacterComponent :data="character" />
-      </li>
-    </ul>
+    <div class="container">
+      <ul class="flex q-gutter-md justify-center q-mt-lg">
+        <li
+          v-for="character in charactersList"
+          :key="character.id"
+          @click="handleClick(character.id)"
+        >
+          <SmallCharacterComponent :data="character" />
+        </li>
+      </ul>
+
+      <div class="btn-wrapper">
+        <FooterButtons
+          :handlePrevious="handlePrevPage"
+          :handleNext="handleNextPage"
+        />
+      </div>
+    </div>
   </q-page>
 </template>
-
-<style lang="scss" scoped>
-.cards-wrapper {
-  max-width: 85vw;
-}
-</style>
 
 <script>
 import { defineComponent } from "vue";
 import { getCharactersByPage } from "src/controllers/CharactersController";
 import SmallCharacterComponent from "../components/SmallCharacterComponent.vue";
+import FooterButtons from "src/components/FooterButtons.vue";
 
 export default defineComponent({
   name: "HomePage",
@@ -34,6 +38,7 @@ export default defineComponent({
 
   components: {
     SmallCharacterComponent,
+    FooterButtons,
   },
 
   methods: {
@@ -50,6 +55,30 @@ export default defineComponent({
     handleClick(id) {
       this.$router.push(`/character/${id}`);
     },
+
+    handlePrevPage() {
+      const page = Number(this.$route.query.page - 1);
+
+      console.log(page);
+
+      if (page == 0) {
+        this.$router.push(`/?page=42`);
+        return;
+      }
+
+      this.$router.push(`/?page=${page}`);
+    },
+
+    handleNextPage() {
+      const page = Number(this.$route.query.page) + 1;
+
+      if (page == 43) {
+        this.$router.push(`/?page=1`);
+        return;
+      }
+
+      this.$router.push(`/?page=${page}`);
+    },
   },
 
   watch: {
@@ -65,3 +94,24 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.container {
+  max-width: 85vw;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  padding-bottom: 20px;
+
+  & > div {
+    max-width: 70vw;
+  }
+}
+
+.btn-wrapper {
+  width: 100%;
+}
+</style>

@@ -3,24 +3,10 @@
     <q-card class="my-card" flat bordered>
       <CharacterComponent :data="data" />
 
-      <q-separator></q-separator>
-
-      <q-card-actions class="flex justify-between btns-wrapper">
-        <q-btn
-          class="q-mt-md"
-          color="primary"
-          label="Anterior"
-          @click="handlePreviousCharacter"
-          icon="arrow_back"
-        />
-        <q-btn
-          class="q-mt-md"
-          color="primary"
-          label="Próximo"
-          @click="handleNextCharacter"
-          icon-right="arrow_forward"
-        />
-      </q-card-actions>
+      <FooterButtons
+        :handlePrevious="handlePreviousCharacter"
+        :handleNext="handleNextCharacter"
+      />
     </q-card>
   </div>
 </template>
@@ -29,6 +15,7 @@
 import { defineComponent } from "vue";
 import { getCharacter } from "src/controllers/CharactersController";
 import CharacterComponent from "../components/CharacterComponent.vue";
+import FooterButtons from "src/components/FooterButtons.vue";
 
 export default defineComponent({
   name: "CharacterPage",
@@ -41,6 +28,7 @@ export default defineComponent({
 
   components: {
     CharacterComponent,
+    FooterButtons,
   },
 
   methods: {
