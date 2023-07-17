@@ -39,3 +39,27 @@ export default defineComponent({
   },
 });
 </script>
+
+<script setup>
+import { getCharacter } from "../controllers/CharactersController.js";
+
+let characters = [];
+
+// getAllCharacters().then((res) => {
+//   characters.push(res);
+
+//   console.log(characters);
+// });
+
+// getCharacter(52).then((res) => {
+//   characters.push(res);
+
+//   console.log(characters);
+// });
+</script>
+
+<style lang="scss" scoped>
+.caption {
+  color: #f1f1f186;
+}
+</style>

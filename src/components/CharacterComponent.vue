@@ -1,6 +1,6 @@
 <template>
   <q-card-section horizontal class="card-wrapper">
-    <q-card-section class="col-7 q-pt-xs">
+    <q-card-section class="col-7 q-pt-sm">
       <div class="text-overline">{{ data.id }}</div>
 
       <div class="text-h5 q-mt-sm q-mb-xs">{{ data.name }}</div>
@@ -46,3 +46,25 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.q-img {
+  border-radius: 8px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 1rem 0;
+
+  color: #f1f1f186;
+  font-size: 0.85rem;
+}
+
+.card-wrapper {
+  min-width: 60vw;
+  background-color: $dark;
+}
+</style>

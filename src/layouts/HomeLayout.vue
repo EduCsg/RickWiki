@@ -4,7 +4,7 @@
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
+        <q-toolbar-title class="cursor-pointer" @click="handleClick()">
           <q-avatar>
             <img
               src="https://rickandmortyapi.com/icons/icon-512x512.png?v=1538abef51e33ef514e8fe1ab9aeab4e"
@@ -19,7 +19,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer class="bg-dark" v-model="leftDrawerOpen" show-if-above>
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -93,6 +93,12 @@ export default defineComponent({
     EssentialLink,
   },
 
+  methods: {
+    handleClick() {
+      this.$router.push("/");
+    },
+  },
+
   setup() {
     const leftDrawerOpen = ref(false);
 
@@ -106,3 +112,9 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.logoInvert {
+  filter: invert(1);
+}
+</style>
