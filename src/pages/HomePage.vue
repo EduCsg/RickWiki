@@ -15,6 +15,9 @@
         <FooterButtons
           :handlePrevious="handlePrevPage"
           :handleNext="handleNextPage"
+          :activePage="Number($route.query.page)"
+          :prevText="`Página ${calcChangePage()}`"
+          :nextText="`Página ${calcChangePage('next')}`"
         />
       </div>
     </div>
@@ -78,6 +81,22 @@ export default defineComponent({
       }
 
       this.$router.push(`/?page=${page}`);
+    },
+
+    calcChangePage(to) {
+      const activePage = Number(this.$route.query.page);
+
+      let newPage = to == "next" ? activePage + 1 : activePage - 1;
+
+      if (newPage <= 0) {
+        return 42;
+      }
+
+      if (newPage >= 43) {
+        return 1;
+      }
+
+      return newPage;
     },
   },
 

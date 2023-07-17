@@ -6,6 +6,8 @@
       <FooterButtons
         :handlePrevious="handlePreviousCharacter"
         :handleNext="handleNextCharacter"
+        :prevText="prevCharacter.name ? prevCharacter.name.split(' ')[0] : ''"
+        :nextText="nextCharacter.name ? nextCharacter.name.split(' ')[0] : ''"
       />
     </q-card>
   </div>
@@ -23,6 +25,8 @@ export default defineComponent({
   data() {
     return {
       data: {}, // inicializa um objeto vazio
+      prevCharacter: {},
+      nextCharacter: {},
     };
   },
 
@@ -64,6 +68,41 @@ export default defineComponent({
         this.$router.push(`/character/1`);
       }
     },
+
+    calcChangeCharacter(to) {
+      const activeId = Number(this.$route.params.id);
+      let newId;
+
+      if (to == "next") {
+        newId = activeId + 1;
+
+        if (newId >= 827) {
+          newId = 1;
+        }
+
+        getCharacter(newId)
+          .then((res) => {
+            this.nextCharacter = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        newId = activeId - 1;
+
+        if (newId <= 0) {
+          newId = 826;
+        }
+
+        getCharacter(newId)
+          .then((res) => {
+            this.prevCharacter = res;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    },
   },
 
   watch: {
@@ -73,6 +112,9 @@ export default defineComponent({
         const id = to.params.id;
 
         this.getCharacter(id);
+
+        this.calcChangeCharacter("next");
+        this.calcChangeCharacter("prev");
       },
 
       immediate: true,

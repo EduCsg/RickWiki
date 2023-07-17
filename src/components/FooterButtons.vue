@@ -3,14 +3,19 @@
     <q-btn
       no-caps
       class="q-mt-md"
-      label="Anterior"
+      :label="prevText"
       @click="handlePrevious"
       icon="arrow_back"
     />
+
+    <p class="activePage">
+      {{ activePage ? "Página " + activePage : "" }}
+    </p>
+
     <q-btn
       no-caps
       class="q-mt-md"
-      label="Próximo"
+      :label="nextText"
       @click="handleNext"
       icon-right="arrow_forward"
     />
@@ -33,6 +38,20 @@ export default defineComponent({
       type: Function,
       required: true,
     },
+
+    activePage: {
+      type: Number,
+    },
+
+    prevText: {
+      type: String,
+      required: true,
+    },
+
+    nextText: {
+      type: String,
+      required: true,
+    },
   },
 });
 </script>
@@ -49,5 +68,15 @@ export default defineComponent({
 .q-btn {
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
+}
+
+.activePage {
+  background-color: $dark-page;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: $dark-page;
+    cursor: default;
+  }
 }
 </style>
