@@ -1,42 +1,14 @@
 <template>
   <div class="wrapper">
-    <img
-      :src="data.imageURL"
-      alt="Imagem do fulano"
-      spinner-color="white"
-      style="max-width: 160px"
-    />
+    <div class="img-title">
+      <img
+        :src="data.imageURL"
+        alt="Imagem do fulano"
+        spinner-color="white"
+        style="max-width: 160px"
+      />
 
-    <h1 class="character-name">{{ data.name }}</h1>
-
-    <div class="character-info">
-      <div class="info-details">
-        <p class="info-title">Status</p>
-        <p>{{ data.status }}</p>
-      </div>
-
-      <div class="info-details">
-        <p class="info-title">Espécie</p>
-        <p>{{ data.species }}</p>
-      </div>
-
-      <div class="info-details">
-        <p class="info-title">Localização</p>
-        <p>{{ data.location }}</p>
-      </div>
-
-      <div class="info-details">
-        <p class="info-title">Presente em</p>
-        <p>
-          {{ data.episodes }}
-          {{ data.episodes == "1" ? "episódio" : "episódios" }}
-        </p>
-      </div>
-
-      <div class="info-details">
-        <p class="info-title">Origem</p>
-        <p>{{ data.origin }}</p>
-      </div>
+      <h1 class="character-name text-center">{{ data.name }}</h1>
     </div>
 
     <p class="id-tag">{{ data.id }}</p>
@@ -60,9 +32,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
   width: 200px;
   height: 100%;
   background-color: $dark;
@@ -76,15 +49,10 @@ export default defineComponent({
   }
 
   & > .id-tag {
-    position: absolute;
-    right: 15px;
-    bottom: -5px;
     font-size: 1rem;
-  }
-
-  & > img {
-    border-radius: 8px;
-    align-self: center;
+    align-self: end;
+    line-height: 0;
+    color: #f1f1f186;
   }
 
   .character-name {
@@ -101,6 +69,17 @@ export default defineComponent({
 
     font-size: 1rem;
     color: #f1f1f186;
+  }
+}
+.img-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+
+  & > img {
+    border-radius: 8px;
+    align-self: center;
   }
 }
 
