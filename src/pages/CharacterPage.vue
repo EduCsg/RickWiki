@@ -37,14 +37,49 @@ export default defineComponent({
 
   methods: {
     // faz o request do personagem atual
-    getCharacter(id) {
-      getCharacter(id)
-        .then((res) => {
-          this.data = res;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    async getCharacterById(id) {
+      try {
+        return await getCharacter(id);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    getNextId(id) {
+      let newId = id + 1;
+
+      if (newId >= 827) {
+        newId = 1;
+      }
+
+      return newId;
+    },
+
+    getPrevId(id) {
+      let newId = id - 1;
+
+      if (newId <= 0) {
+        newId = 826;
+      }
+
+      return newId;
+    },
+
+    async setCharacters(to) {
+      const id = Number(to.params.id);
+
+      const nextId = this.getNextId(id);
+      const prevId = this.getPrevId(id);
+
+      const [current, next, prev] = await Promise.all([
+        this.getCharacterById(id),
+        this.getCharacterById(nextId),
+        this.getCharacterById(prevId),
+      ]);
+
+      this.data = current;
+      this.nextCharacter = next;
+      this.prevCharacter = prev;
     },
 
     // navega para a página do personagem anterior
@@ -68,53 +103,13 @@ export default defineComponent({
         this.$router.push(`/character/1`);
       }
     },
-
-    calcChangeCharacter(to) {
-      const activeId = Number(this.$route.params.id);
-      let newId;
-
-      if (to == "next") {
-        newId = activeId + 1;
-
-        if (newId >= 827) {
-          newId = 1;
-        }
-
-        getCharacter(newId)
-          .then((res) => {
-            this.nextCharacter = res;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      } else {
-        newId = activeId - 1;
-
-        if (newId <= 0) {
-          newId = 826;
-        }
-
-        getCharacter(newId)
-          .then((res) => {
-            this.prevCharacter = res;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    },
   },
 
   watch: {
     // faz o request do id atual quando a rota muda
     $route: {
       handler(to, from) {
-        const id = to.params.id;
-
-        this.getCharacter(id);
-
-        this.calcChangeCharacter("next");
-        this.calcChangeCharacter("prev");
+        this.setCharacters(to);
       },
 
       immediate: true,
