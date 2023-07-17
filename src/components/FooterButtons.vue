@@ -1,12 +1,14 @@
 <template>
   <q-card-actions class="flex justify-between btns-wrapper">
     <q-btn
+      no-caps
       class="q-mt-md"
       label="Anterior"
       @click="handlePrevious"
       icon="arrow_back"
     />
     <q-btn
+      no-caps
       class="q-mt-md"
       label="Próximo"
       @click="handleNext"
@@ -14,16 +16,6 @@
     />
   </q-card-actions>
 </template>
-
-<style lang="scss" scoped>
-.btns-wrapper {
-  & > * {
-    background-color: $dark;
-    margin: 0 0.5rem;
-    text-align: center;
-  }
-}
-</style>
 
 <script>
 import { defineComponent } from "vue";
@@ -44,3 +36,18 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss" scoped>
+.btns-wrapper {
+  & > * {
+    background-color: $dark;
+    margin: 0 0.5rem;
+    text-align: center;
+  }
+}
+
+.q-btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+</style>

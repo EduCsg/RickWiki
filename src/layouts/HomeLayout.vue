@@ -19,12 +19,12 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer class="bg-dark" v-model="leftDrawerOpen" show-if-above>
+    <q-drawer class="bg-dark" v-model="leftDrawerOpen">
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Links Relacionados </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
+        <AsideLinks
+          v-for="link in AsideLinks"
           :key="link.title"
           v-bind="link"
         />
@@ -39,50 +39,38 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import EssentialLink from "components/EssentialLink.vue";
+import AsideLinks from "components/AsideLinks.vue";
 
 const linksList = [
   {
-    title: "Procurar  Personagens",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "https://quasar.dev",
+    title: "Home",
+    icon: "home",
+    link: "/",
+    isBlank: false,
   },
   {
     title: "Github",
-    caption: "github.com/quasarframework",
     icon: "code",
-    link: "https://github.com/quasarframework",
+    link: "https://github.com/EduCsg/RickWiki",
+    isBlank: true,
   },
   {
-    title: "Discord Chat Channel",
-    caption: "chat.quasar.dev",
-    icon: "chat",
-    link: "https://chat.quasar.dev",
+    title: "API Docs",
+    icon: "webhook",
+    link: "https://rickandmortyapi.com",
+    isBlank: true,
   },
   {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
+    title: "Quero contribuir!",
+    icon: "emoji_people",
+    link: "https://github.com/EduCsg/RickWiki/pulls",
+    isBlank: true,
   },
   {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
+    title: "Encontrei um bug!",
+    icon: "bug_report",
+    link: "https://github.com/EduCsg/RickWiki/issues/new",
+    isBlank: true,
   },
 ];
 
@@ -90,7 +78,7 @@ export default defineComponent({
   name: "HomeLayout",
 
   components: {
-    EssentialLink,
+    AsideLinks,
   },
 
   methods: {
@@ -103,7 +91,7 @@ export default defineComponent({
     const leftDrawerOpen = ref(false);
 
     return {
-      essentialLinks: linksList,
+      AsideLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
