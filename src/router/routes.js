@@ -24,7 +24,7 @@ const routes = [
 
   {
     path: "/character",
-    component: () => import("layouts/CharacterLayout.vue"),
+    component: () => import("layouts/HomeLayout.vue"),
     children: [
       { path: ":id", component: () => import("pages/CharacterPage.vue") },
     ],

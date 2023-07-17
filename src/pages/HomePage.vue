@@ -1,22 +1,27 @@
 <template>
   <q-page class="flex flex-center">
-    <ul>
+    <ul class="flex q-gutter-md justify-center q-mt-lg cards-wrapper">
       <li
         v-for="character in charactersList"
         :key="character.id"
-        class="q-ma-md cursor-pointer character-frame"
         @click="handleClick(character.id)"
       >
-        <CharacterComponent :data="character" />
+        <SmallCharacterComponent :data="character" />
       </li>
     </ul>
   </q-page>
 </template>
 
+<style lang="scss" scoped>
+.cards-wrapper {
+  max-width: 85vw;
+}
+</style>
+
 <script>
 import { defineComponent } from "vue";
 import { getCharactersByPage } from "src/controllers/CharactersController";
-import CharacterComponent from "../components/CharacterComponent.vue";
+import SmallCharacterComponent from "../components/SmallCharacterComponent.vue";
 
 export default defineComponent({
   name: "HomePage",
@@ -28,7 +33,7 @@ export default defineComponent({
   },
 
   components: {
-    CharacterComponent,
+    SmallCharacterComponent,
   },
 
   methods: {
